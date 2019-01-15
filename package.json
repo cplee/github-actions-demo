@@ -10,10 +10,11 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
     "mocha": "^5.2.0"
   },
   "scripts": {
-      "start": "node index.js",
-      "test": "mocha ./tests --recursive"
+    "start": "node index.js",
+    "test": "mocha ./tests --recursive"
   }
 }

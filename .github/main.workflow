@@ -28,6 +28,9 @@ action "branch-filter" {
 action "deploy" {
   needs = ["branch-filter"]
   uses = "actions/bin/sh@master"
-  args = ["echo Deploy with secret $PHONY_SECRET"]
+  args = ["env"]
   secrets = ["PHONY_SECRET"]
+  env = {
+    PHONY_ENV = "foo"
+  }
 }
