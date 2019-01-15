@@ -1,0 +1,19 @@
+{
+  "name": "github-actions-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:cplee/github-actions-demo.git",
+  "author": "Casey Lee <cplee@nektos.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+      "start": "node index.js",
+      "test": "mocha ./tests --recursive"
+  }
+}
