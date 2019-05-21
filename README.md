@@ -7,7 +7,7 @@ All the tasks necessary for testing, building and deploying this code is already
 Try these:
 
 * `act -a lint` - run the linter
-* `act -a test` - run the linter
+* `act -a test` - run the tests
 * `act` - run the the entire pipeline
 * `act -l` - view the execution graph
 
