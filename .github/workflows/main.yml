@@ -1,0 +1,19 @@
+name: test-and-deploy
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: 
+      image: node:11.6.0
+    steps:
+    - uses: actions/checkout@v2
+    - run: npm install
+    - run: npm test
+    - uses: ./.github/workflows/jshint
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+    - run: env

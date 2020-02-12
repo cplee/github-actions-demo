@@ -1,0 +1,4 @@
+name: 'jshint'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
