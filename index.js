@@ -1,12 +1,11 @@
-var express = require('express')
-var app = express()
+const express = require('express');
 
-app.get('/', function (req, res) {
+const app = express();
+
+app.get('/', (req, res) => {
   res.set('Content-Type', 'text/plain');
-  res.send('Hello World')
-})
+  res.send('Hello World');
+});
 
-module.exports = app.listen(8080, function () {
-  console.log('Listening on port 8080')
-})
-
+module.exports = app.listen(8080, () => {
+});

@@ -11,10 +11,19 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jasmine": "^4.1.1",
     "mocha": "^5.2.0"
+  },
+  "resolutions": {
+    "minimist": "^1.2.3"
   },
   "scripts": {
     "start": "node index.js",
-    "test": "mocha ./tests --recursive"
+    "test": "mocha ./tests --recursive",
+    "lint": "eslint ."
   }
 }
