@@ -6,7 +6,6 @@ All the tasks necessary for testing, building and deploying this code is already
 
 Try these:
 
-* `act -j lint` - run the linter
 * `act -j test` - run the tests
 * `act` - run the the entire pipeline
 * `act -l` - view the execution graph
