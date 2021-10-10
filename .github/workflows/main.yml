@@ -20,12 +20,33 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   read-tweet-md:
-    name: Validate
+    name: Read TWEET.md
     runs-on: ubuntu-latest
+    needs: [get-contributor-info]
+
+    outputs:
+      tweet: ${{ steps.extract.outputs.tweet }}
+      card-text: ${{ steps.extract.outputs.card-text }}
 
     steps:
-      - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
+      with:
+        ref: "refs/pull/${{ github.event.number }}/merge"
+    - name: Extract tweet message and changelog
+      id: extract
+      uses: strawberry-graphql/tweet-actions/read-tweet@v3
+      with:
+        changelog: ${{ needs.release-file-check.outputs.changelog }}
+        version: "(next)"
+        contributor_name: ${{ needs.get-contributor-info.outputs.contributor-name }}
+        contributor_twitter_username: ${{ needs.get-contributor-info.outputs.contributor-twitter-username }}
+
+  validate-tweet:
+    runs-on: ubuntu-latest
+    needs: read-tweet-md
+    if: ${{ needs.read-tweet-md.outputs.tweet != '' }}
+    steps:
       - name: Validate tweet
-        uses: strawberry-graphql/tweet-actions/validate-tweet@v1
+        uses: strawberry-graphql/tweet-actions/validate-tweet@v3
         with:
-          tweet: "dGhpcyBpcyBhIHR3ZWV0"
+          tweet: ${{ needs.read-tweet-md.outputs.tweet }}
