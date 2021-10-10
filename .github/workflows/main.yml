@@ -2,10 +2,30 @@ name: CI
 on: push
 
 jobs:
-  test:
+  get-contributor-info:
+    name: Get PR info
     runs-on: ubuntu-latest
+
+    outputs:
+      contributor-name: ${{ steps.get-info.outputs['contributor-name'] }}
+      contributor-username: ${{ steps.get-info.outputs['contributor-username'] }}
+      contributor-twitter-username: ${{ steps.get-info.outputs['contributor-twitter-username'] }}
+
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-    - run: npm install
-    - run: npm test
+      - uses: actions/checkout@v2
+      - name: Get PR info
+        id: get-info
+        uses: strawberry-graphql/get-pr-info-action@v1
+        env:
+          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  read-tweet-md:
+    name: Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Validate tweet
+        uses: strawberry-graphql/tweet-actions/validate-tweet@v1
+        with:
+          tweet: "dGhpcyBpcyBhIHR3ZWV0"
