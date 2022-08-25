@@ -9,5 +9,3 @@ Try these:
 * `act -j test` - run the tests
 * `act` - run the the entire pipeline
 * `act -l` - view the execution graph
-
-test webhook
