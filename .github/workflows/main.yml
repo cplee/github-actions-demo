@@ -4,8 +4,19 @@ on: push
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # If one of these versions is changed, 'required_status_checks' context build name, must be updated
+        # Now it's 'build (16.15.0, 8.5.5)', if node version was updated, we'll need to rename build context vars:
+        # I.E.: build (16.15.0, 8.5.5) => build (16.x, 8.5.5)
+        node-version: [16.15.0]
+        npm-version: [8.5.5]
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-    - run: npm install
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'      
+    - run: npm ci
     - run: npm test
